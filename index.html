@@ -309,7 +309,7 @@
                                                     </div>
                                                     
                                                     <!-- View All Button - Fixed at Bottom -->
-                                                    <div class="position-absolute bottom-0 end-0 p-3" style="background-color: white; z-index: 10;">
+                                                    <div class="position-absolute bottom-0 end-0 p-3" style="background-color: white; z-index: 10; bottom: 100px; right: 24px;">
                                                         <a href="find-a-lawyer.html" class="view-all-dubai-lawyers" style="color: var(--light-teal); text-decoration: none; font-weight: 500;">
                                                             <span id="viewAllLawyersTextBottom">View All Lawyers in Dubai</span>
                                                             <span style="display: inline-block; width: 24px; height: 24px; background-color: var(--light-teal); border-radius: 50%; margin-left: 8px; text-align: center; line-height: 24px;">
@@ -1459,6 +1459,10 @@
                                                         class="lang-flag" />
                                                     <p class="lang-text d-block d-xl-none lnguaue-style">English</p>
                                                 </div>
+                                                <div class="lang-dropdown">
+                                                    <a href="#" class="lang-option" data-lang="en"><img class="lang-icon" src="https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/gb.svg" alt="English">English</a>
+                                                    <a href="#" class="lang-option" data-lang="ar"><img class="lang-icon" src="https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/ae.svg" alt="Arabic">Arabic</a>
+                                                </div>
                                             </div>
                                         </span></li>
                                 </ul>
@@ -1475,6 +1479,10 @@
                                                             src="../cdn2.iconfinder.com/data/icons/world-flag-icons/128/212055.png"
                                                             class="lang-flag" />
                                                         <p class="lang-text d-block d-xl-none lnguaue-style">English</p>
+                                                    </div>
+                                                    <div class="lang-dropdown">
+                                                        <a href="#" class="lang-option" data-lang="en"><img class="lang-icon" src="https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/gb.svg" alt="English">English</a>
+                                                        <a href="#" class="lang-option" data-lang="ar"><img class="lang-icon" src="https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/ae.svg" alt="Arabic">Arabic</a>
                                                     </div>
                                                 </div>
                                             </span></div>
@@ -2612,9 +2620,99 @@
             }, 100);
         });
     </script>
+    <script>
+        // Language dropdown interactions
+        (function(){
+            var dropdowns = document.querySelectorAll('.locale-class');
+            function closeAll(except){
+                document.querySelectorAll('.lang-dropdown').forEach(function(menu){
+                    if (!except || menu !== except) menu.classList.remove('show');
+                });
+            }
+            dropdowns.forEach(function(wrapper){
+                var trigger = wrapper.querySelector('.current-lang');
+                var menu = wrapper.querySelector('.lang-dropdown');
+                if (!trigger || !menu) return;
+                trigger.addEventListener('click', function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var isOpen = menu.classList.contains('show');
+                    closeAll();
+                    if (!isOpen) menu.classList.add('show');
+                });
+                menu.addEventListener('click', function(e){ e.stopPropagation(); });
+            });
+            document.addEventListener('click', function(){ closeAll(); });
+            document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeAll(); });
+            // Update language selection text and icon when chosen
+            document.querySelectorAll('.lang-option').forEach(function(item){
+                item.addEventListener('click', function(e){
+                    e.preventDefault();
+                    var lang = this.getAttribute('data-lang');
+                    localStorage.setItem('site_lang', lang);
+                    var label = lang === 'ar' ? 'Arabic' : 'English';
+                    document.querySelectorAll('.lang-text').forEach(function(t){ t.textContent = label; });
+                    document.querySelectorAll('.locale-class .lang-flag').forEach(function(img){
+                        if (lang === 'ar') {
+                            img.setAttribute('src', 'https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/ae.svg');
+                        } else {
+                            img.setAttribute('src', 'https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/gb.svg');
+                        }
+                    });
+                    // Close menus after selection
+                    closeAll();
+                });
+            });
+            // Initialize from localStorage
+            var saved = localStorage.getItem('site_lang');
+            if (!saved) {
+                saved = 'en';
+                localStorage.setItem('site_lang', saved);
+            }
+            var label = saved === 'ar' ? 'Arabic' : 'English';
+            document.querySelectorAll('.lang-text').forEach(function(t){ t.textContent = label; });
+            document.querySelectorAll('.locale-class .lang-flag').forEach(function(img){
+                img.setAttribute('src', saved === 'ar' ? 'https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/ae.svg' : 'https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/gb.svg');
+            });
+        })();
+    </script>
     
     <!-- Mega Menu Styles -->
     <style>
+        /* Language dropdown */
+        .locale-class { position: relative; }
+        .lang-dropdown {
+            position: absolute;
+            right: 0;
+            top: calc(100% + 8px);
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,.12);
+            padding: 8px 6px;
+            min-width: 160px;
+            display: none;
+            z-index: 1200;
+        }
+        .lang-dropdown.show { display: block; }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            color: #222;
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .lang-option .lang-icon {
+            width: 18px;
+            height: 14px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+        .lang-option:hover { background: #f3f5f7; }
+
         /* Mega Menu Base Styles */
         .mega-menu {
             position: fixed;
@@ -2634,7 +2732,9 @@
             transform: translateY(-10px);
             transition: all 0.3s ease;
             display: none;
-            overflow: visible;
+            max-height: 80vh;            /* keep inside viewport */
+            overflow-y: auto;            /* allow vertical scroll */
+            overflow-x: hidden;          /* prevent horizontal spill */
         }
         
         .dropdown:hover .mega-menu,
@@ -2657,6 +2757,7 @@
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            white-space: normal; /* wrap long headings */
         }
         
         /* Location Links */
@@ -2670,6 +2771,7 @@
             border-radius: 4px;
             padding-left: 10px;
             margin-bottom: 2px;
+            white-space: normal;         /* allow wrapping */
         }
         
         .mega-menu-link:hover {
@@ -2738,6 +2840,7 @@
             transition: all 0.2s ease;
             border-radius: 4px;
             padding-left: 10px;
+            white-space: normal; /* wrap long link text */
         }
         
         .practice-link:hover {
@@ -2801,7 +2904,7 @@
             width: 100%;
             margin: 0;
             height: 100%;
-            overflow: hidden;
+            overflow: visible; /* allow CTA at bottom-right to show fully */
         }
         
         .mega-menu .row {
