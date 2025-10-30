@@ -1,0 +1,46 @@
+.w-17.change-width-two.btn-get-free.btn-commn {
+    background-color: #7B2C80;
+    color: #FFFFFF !important;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    min-width: 200px;
+    margin: 0 auto;
+}
+
+.w-17.change-width-two.btn-get-free.btn-commn:hover {
+    background-color: #632066;
+    transform: translateY(-2px);
+    color: #FFFFFF !important;
+    text-decoration: none;
+}
+
+.w-17.change-width-two.btn-get-free.btn-commn .border.border-radius-1.banner-arrow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    margin-left: 8px;
+}
+
+.w-17.change-width-two.btn-get-free.btn-commn:hover .border.border-radius-1.banner-arrow-btn {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Ensure the text inside the button is properly styled */
+.w-17.change-width-two.btn-get-free.btn-commn .text-white {
+    color: #FFFFFF !important;
+}
+
+/* Make the SVG icon smaller */
+.w-17.change-width-two.btn-get-free.btn-commn svg {
+    width: 14px;
+    height: 14px;
+}
