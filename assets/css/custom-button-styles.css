@@ -1,5 +1,5 @@
 .w-17.change-width-two.btn-get-free.btn-commn {
-    background-color: #7B2C80;
+    background-color: var(--primary);
     color: #FFFFFF !important;
     padding: 12px 24px;
     border-radius: 12px;
@@ -13,7 +13,7 @@
 }
 
 .w-17.change-width-two.btn-get-free.btn-commn:hover {
-    background-color: #632066;
+    background-color: var(--primary-600);
     transform: translateY(-2px);
     color: #FFFFFF !important;
     text-decoration: none;

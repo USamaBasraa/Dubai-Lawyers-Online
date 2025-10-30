@@ -1,10 +1,75 @@
+/* Theme variables derived from logo (primary blue and deep navy) */
+:root {
+    --primary: #2F6EF3; /* bright blue */
+    --primary-600: #2457C2; /* hover */
+    --primary-700: #1C469B; /* active */
+    --navy: #103A5C; /* deep navy */
+    --text-color: #0F1F2E;
+    --muted-bg: #F6F8FC;
+    --white: #FFFFFF;
+    --light-teal: var(--primary);
+}
+
+/* Base overrides */
+body {
+    color: var(--text-color);
+    background-color: var(--white);
+}
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { color: var(--primary-600); text-decoration: none; }
+
+.navbar .nav-link.active,
+.navbar .nav-link:focus,
+.navbar .nav-link:hover { color: var(--primary) !important; }
+
+.btn-outline-success { color: var(--primary) !important; border-color: var(--primary) !important; }
+.btn-outline-success:hover,
+.btn-outline-success:focus,
+.btn-outline-success:active { color: var(--white) !important; background-color: var(--primary-600) !important; border-color: var(--primary-600) !important; box-shadow: none !important; }
+
+/* Header specific buttons */
+.btn-lawyer { background-color: var(--primary) !important; border-color: var(--primary) !important; color: var(--white) !important; }
+.btn-lawyer:hover,
+.btn-lawyer:focus,
+.btn-lawyer:active { background-color: var(--primary-600) !important; border-color: var(--primary-600) !important; box-shadow: none !important; }
+.btn-login { color: var(--primary) !important; border-color: var(--primary) !important; background-color: transparent !important; }
+.btn-login:hover,
+.btn-login:focus,
+.btn-login:active,
+.btn.btn-outline-success.btn-login:hover,
+.btn.btn-outline-success.btn-login:focus,
+.btn.btn-outline-success.btn-login:active { background-color: var(--primary-600) !important; color: var(--white) !important; border-color: var(--primary-600) !important; box-shadow: none !important; text-decoration: none !important; }
+
+/* Prevent underline on any button hover */
+.btn:hover { text-decoration: none !important; }
+
+.dropdown-menu.mega-menu { border-top: 2px solid var(--primary); }
+.mega-menu .mega-menu-link { color: var(--text-color); }
+.mega-menu .mega-menu-link:hover { color: var(--primary); }
+.mega-menu .mega-menu-link.active { color: var(--primary); background-color: rgba(47, 110, 243, 0.08); border-radius: 8px; }
+
+.mega-menu .practice-area-header .practice-title { color: var(--navy); }
+.mega-menu .practice-link { color: var(--text-color); }
+.mega-menu .practice-link:hover { color: var(--primary); }
+
+.mega-menu .mega-menu-view-all,
+.view-all-dubai-lawyers { color: var(--primary) !important; }
+.mega-menu .mega-menu-view-all:hover,
+.view-all-dubai-lawyers:hover { color: var(--primary-600) !important; }
+
+/* Practice Areas submenu hover pill style */
+.practice-areas-mega-menu .practice-link { color: var(--text-color); border-radius: 8px; padding: 8px 12px; display: inline-block; transition: background-color .2s ease, color .2s ease; }
+.practice-areas-mega-menu .practice-link:hover { color: var(--primary); background-color: rgba(47, 110, 243, 0.08); }
+.practice-areas-mega-menu .practice-link.active { color: var(--primary); background-color: rgba(47, 110, 243, 0.08); border-radius: 8px; }
+
 .btn-view-all-services {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background-color: #7B2C80;
-    color: #FFFFFF;
+    background-color: var(--primary);
+    color: var(--white);
     padding: 12px 24px;
     border-radius: 12px;
     border: none;
@@ -17,7 +82,7 @@
 }
 
 .btn-view-all-services:hover {
-    background-color: #632066;
+    background-color: var(--primary-600);
     transform: translateY(-2px);
 }
 
@@ -33,4 +98,36 @@
 
 .btn-view-all-services:hover .arrow-icon {
     background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Generic primary button helper if needed */
+.btn-primary,
+.btn.btn-primary {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: var(--white) !important;
+}
+.btn-primary:hover,
+.btn.btn-primary:hover {
+    background-color: var(--primary-600) !important;
+    border-color: var(--primary-600) !important;
+}
+
+/* Practice Area Cards Section */
+.practice-area-card {
+    border-color: #E0E0E0 !important;
+    transition: all 0.3s ease;
+}
+
+.practice-area-card:hover {
+    background-color: #F5F5F5;
+}
+
+.practice-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.practice-card:hover {
+    transform: translateY(-5px);
 }
